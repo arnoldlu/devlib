@@ -210,7 +210,7 @@ class AdbConnection(object):
             command = 'shell {} {}'.format(self.ls_command, source)
             output = adb_command(self.device, command, timeout=timeout)
             for line in output.splitlines():
-                command = "pull '{}' '{}'".format(line, dest)
+                command = "pull '{}' '{}'".format(line.strip(), dest)
                 adb_command(self.device, command, timeout=timeout)
             return
         command = "pull '{}' '{}'".format(source, dest)
@@ -424,7 +424,7 @@ def _initialize_with_android_home(env):
     logger.debug('Using ANDROID_HOME from the environment.')
     env.android_home = android_home
     env.platform_tools = os.path.join(android_home, 'platform-tools')
-    os.environ['PATH'] += os.pathsep + env.platform_tools
+    os.environ['PATH'] = env.platform_tools + os.pathsep + os.environ['PATH']
     _init_common(env)
     return env
 

@@ -19,8 +19,8 @@ Contents:
    target
    modules
    instrumentation
-
-
+   platform
+   connection
 
 Indices and tables
 ==================
